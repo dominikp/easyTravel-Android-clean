@@ -1,0 +1,45 @@
+apply plugin: 'com.android.application'
+
+repositories {
+        google()
+        jcenter()
+
+    }
+
+android {
+    compileSdkVersion 28
+
+    useLibrary 'org.apache.http.legacy'
+
+    defaultConfig {
+        applicationId "com.dynatrace.easytravel.android"
+        minSdkVersion 15
+        targetSdkVersion 28
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles 'proguard.cfg'
+        }
+    }
+}
+
+buildscript {
+    repositories {
+        google()
+        jcenter()
+
+    }
+}
+
+dependencies {
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.0.1'
+    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.gridlayout:gridlayout:1.0.0'
+    implementation 'com.jakewharton:butterknife:8.0.1'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+}

@@ -1,0 +1,43 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:key="pref_category_host_settings"
+        android:title="@string/preference_category_host_settings">
+        <EditTextPreference
+            android:defaultValue="https://easytravel.perform-2018.dynalabs.io"
+            android:inputType="textUri"
+            android:key="pref_hostname"
+            android:order="1"
+            android:persistent="true"
+            android:summary="https://easytravel.perform-2018.dynalabs.io"
+            android:title="@string/preference_hostname" />
+
+        <EditTextPreference
+            android:defaultValue="443"
+            android:inputType="number"
+            android:key="pref_port"
+            android:order="2"
+            android:persistent="true"
+            android:summary="443"
+            android:title="@string/preference_port" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="pref_category_event_settings"
+        android:title="@string/preference_category_event_settings">
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="pref_event_crash_login"
+            android:order="21"
+            android:persistent="true"
+            android:title="@string/preference_event_crash_login" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="pref_event_error_on_booking_and_search"
+            android:order="22"
+            android:persistent="true"
+            android:title="@string/preference_event_error_on_booking_and_search" />
+
+    </PreferenceCategory>
+</PreferenceScreen>

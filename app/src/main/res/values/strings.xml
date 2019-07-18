@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="appName">EasyTravel</string>
+    <string name="appShortDescription">Mobile Booking Software</string>
+    <string name="easyTravelLogo">easyTravel logo</string>
+
+    // Menu Strings
+    <string name="menuSearch">Search</string>
+    <string name="menuUser">User Account</string>
+    <string name="menuOffers">Special Offers</string>
+    <string name="menuContact">Contact</string>
+    <string name="menuTerms">Terms of Use</string>
+    <string name="menuPrivacy">Privacy Policy</string>
+    <string name="menuSettings">Settings</string>
+    <string name="flushEvents">Flush Events - dT</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    // Search Screen
+    <string name="searchDestination">Enter trip destination</string>
+    <string name="searchFrom">FROM</string>
+    <string name="searchTo">TO</string>
+    <string name="searchButton">SEARCH</string>
+    <string name="suggestionDescription">Here are suggestions for your next destination. Click on them to copy them to the destination textfield.</string>
+    <string name="resultMessage">No results found</string>
+
+    // Journey Detail
+    <string name="journeyPictureDescription">Picture of the journey</string>
+    <string name="journeySampleDescription">This is the description of the journey. This is the description of the journey. This is the description of the journey.</string>
+    <string name="journeyPriceDetails">Price details</string>
+    <string name="journeyAdultsNumber">Adults (1)</string>
+    <string name="journeyKidsNumber">Kids (0)</string>
+    <string name="journeyFlightPrice">Flight price (Round-trip)</string>
+    <string name="journeyHotelPrice">Hotel price</string>
+    <string name="journeyTaxesFees">Taxes and fees</string>
+    <string name="journeyTotalPrice">Total price</string>
+    <string name="journeyButtonBook">Book Journey</string>
+
+    // Settings
+
+    // User
+    <string name="userDescription">Enter your credentials to be able to interact with the server.</string>
+    <string name="userName">User</string>
+    <string name="userPassword">Password</string>
+    <string name="userButtonLogin">Login</string>
+    <string name="userDefaultUsername">hainer</string>
+    <string name="userDefaultPassword">hainer</string>
+
+    // Other
+
+    <!-- RUM config -->
+
+    // Preferences
+    <string name="preference_category_host_settings">Frontend host settings</string>
+    <string name="preference_category_event_settings">Event settings</string>
+
+    <string name="preference_hostname">Hostname</string>
+    <string name="preference_port">Port</string>
+    <string name="preference_event_crash_login">Crash on login</string>
+    <string name="preference_event_error_on_booking_and_search">Error on booking and search</string>
+    <string name="preference_validation_error">Error! %1$s is no valid input for %2$s</string>
+
+</resources>

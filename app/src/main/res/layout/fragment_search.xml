@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <androidx.cardview.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cardSearch"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card_view:cardCornerRadius="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_margin="8dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editDestination"
+                    android:maxLines="1"
+                    android:hint="@string/searchDestination" />
+
+                <androidx.gridlayout.widget.GridLayout
+                    xmlns:grid="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginLeft="8dp"
+                    grid:columnCount="4"
+                    grid:rowCount="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/searchFrom"
+                        style="@style/searchItem"/>
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        tools:text="01.01.1990"
+                        android:id="@+id/buttonFrom"
+                        style="?android:attr/borderlessButtonStyle"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/searchTo"
+                        android:layout_marginRight="0dp"
+                        style="@style/searchItem"/>
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        tools:text="01.01.1990"
+                        android:id="@+id/buttonTo"
+                        style="?android:attr/borderlessButtonStyle"/>
+                </androidx.gridlayout.widget.GridLayout>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="textStart"
+                    android:layout_gravity="start"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_below="@id/cardSearch"
+                    android:text="@string/searchButton"
+                    android:id="@+id/buttonSearchDest"
+                    style="?android:attr/borderlessButtonStyle"/>
+
+                <ProgressBar
+                    android:id="@+id/searchProgress"
+                    style="?android:progressBarStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:indeterminate="true"
+                    android:indeterminateTintMode="src_atop"
+                    android:indeterminateTint="@color/colorPrimary"
+                    android:layout_marginTop="16dp"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:id="@+id/resultMessage"
+                    android:visibility="gone"
+                    android:text="@string/resultMessage"/>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cardSuggestions"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        card_view:cardCornerRadius="4dp"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_margin="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/suggestionDescription"
+                    android:id="@+id/descriptionJourney"/>
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/searchResults"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

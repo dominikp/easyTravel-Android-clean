@@ -1,0 +1,156 @@
+<!-- keep in sync as much as possible with Mobile/iOS/easyTravel/easyTravel/special_offers.html -->
+<html>
+    <script>
+        var parentActionId = 0;
+        var childActionId = 0;
+    </script>
+
+    <head>
+        <link rel="stylesheet" type="text/css" href="easyTravel.css" />
+        <title>Special Offers</title>
+        <script type="text/javascript" src="Dynatrace.js"></script>
+
+        <script type="text/javascript">
+
+                var dynaUEM = new Dynatrace;
+
+                var baseUrl;
+
+                function geoloc(success, fail)
+                {
+                    var is_echo = false;
+                    if(navigator && navigator.geolocation)
+                    {
+                        navigator.geolocation.getCurrentPosition(
+                                 function(pos)
+                                 {
+                                     if (is_echo){ return; }
+                                     is_echo = true;
+                                     success(pos.coords.latitude, pos.coords.longitude);
+                                 },
+                                 function()
+                                 {
+                                    if (is_echo){ return; }
+                                    is_echo = true;
+                                    fail();
+                                }
+                                                                 );
+                    }
+                    else
+                    {
+                        fail();
+                    }
+                }
+
+                function success(lat, lng)
+                {
+                    var status = dynaUEM.setGpsLocation(lng, lat); // method sig is dynaUEM.setGpsLocation(lng, lat)!  not the other way around.
+                }
+
+                function fail()
+                {
+                    var status = dynaUEM.reportErrorString("EasyTravelGPSStatus", "Geo Location failed");
+                }
+
+                function createEasyTravelBaseURL(host, port){
+                    baseUrl = host +':' +port +'/';
+                    var urlDiv = document.getElementById('url');
+                    urlDiv.innerHTML = '<br>' +baseUrl;
+                }
+
+                function getXhr(){
+                    if (typeof window.ActiveXObject != 'undefined') {//does phonegap on IE mobile use ActiveXObject?
+                        var axNs = ['Microsoft.XMLHTTP', 'Msxml2.XMLHTTP', 'Msxml2.XMLHTTP.6.0', 'Msxml2.XMLHTTP.3.0'];
+                        for (var i = 0; i < axNs.length; i++) {
+                            try {
+                                return new window.ActiveXObject(axNs[i]);
+                            } catch (e) {
+                                var status = dynaUEM.reportErrorInteger("EasyTravelActiveObjectError", 1);
+                                //ignore exception. there is no other way to detect which ActiveXObject works
+                            }
+                        }
+                        var status = dynaUEM.reportErrorInteger("EasyTravelGetXhrError", 2);
+                        throw 'Could not create ActiveXObject!';
+                    } else {
+                        return new XMLHttpRequest();
+                    }
+                }
+
+                function processResponse(response){
+                    childActionId = dynaUEM.enterActionParentId("EasyTravelProcessResponse", parentActionId);
+
+                    status = dynaUEM.reportEvent("EasyTravelUrlResponseEvent", childActionId);
+
+                    response = response.replace(/src=\"/gi, 'src="'+baseUrl);
+                    response = response.replace(/href=\"\//gi, 'href="'+baseUrl);
+                    response = response.replace(/Book Now<\/a>/gi, 'Book Now</a><br><br>');
+
+                    var status = dynaUEM.reportValueString("EasyTravelBaseUrl", baseUrl,  childActionId);
+
+                    // Close child action
+                    status = dynaUEM.leaveAction(childActionId);
+
+                    return response;
+                }
+
+                function loadOffers(){
+                    //load offers
+                    var offersUrl = baseUrl + 'CalculateRecommendations';
+                    var urlDiv = document.getElementById('url');
+                    urlDiv.innerHTML = offersUrl;
+
+                    var xhr = getXhr();
+
+                    parentActionId = dynaUEM.enterAction("EasyTravelLoadSpecialOffers");
+
+                    // Tag the requests made under the parentActionId
+                    var status = dynaUEM.startTaggingRequests(parentActionId);
+
+                    xhr.onreadystatechange = function(){
+                        var xhrStatus = dynaUEM.reportValueInt("EasyTravelXhrReadyState", xhr.readyState, parentActionId);
+                        if (xhr.readyState == 4) {
+                            var resDiv = document.getElementById('result');
+                            var offersDiv = document.getElementById('offers');
+                            xhrStatus = dynaUEM.reportValueInt("EasyTravelXhrStatus", xhr.status, parentActionId);
+
+                            if (xhr.status == 200) {
+                                resDiv.innerHTML = 'XHR successful: '+xhr.status;
+                                var offersText = processResponse(xhr.responseText);
+                                document.getElementById('loadOffers').style.visibility = 'hidden';
+                                //replace content with result
+                                offersDiv.innerHTML = offersText;
+                                status = dynaUEM.leaveAction(parentActionId);
+
+                            } else {
+                                xhrStatus = dynaUEM.reportErrorInteger("EasyTravelXhrStatusError", xhr.status, parentActionId);
+                                resDiv.innerHTML = 'XHR failed with response code '+xhr.status+':'+xhr.responseText;
+                                status = dynaUEM.leaveAction(parentActionId);
+                            }
+                        }
+                    };
+                    xhr.open('GET',offersUrl);
+                    xhr.send();
+
+                    // disable button, prevent second request
+                    document.getElementById('loadOffers').onclick= '';
+
+                    status = dynaUEM.reportValueDouble("EasyTravelDoubleValue", 1.23, parentActionId);
+                    status = dynaUEM.flushEvents();
+                }
+            </script>
+
+        <meta name="viewport" content="width=device-width; initial-scale=1.0;" />
+    </head>
+    <body>
+        <script>
+            geoloc(success, fail);
+        </script>
+
+        <div id="offers" align="center">
+            <br>
+            <button id="loadOffers" onclick="loadOffers()" class="offerButton">Load Special Offers</button>
+        </div>
+        <div id="result" style="font-size:10px"></div>
+        <div id="url" style="font-size:10px"></div>
+    </body>
+</html>

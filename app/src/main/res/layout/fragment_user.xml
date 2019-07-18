@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <androidx.cardview.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cardSearch"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card_view:cardCornerRadius="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/userDescription"/>
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TableRow
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/userName"
+                            android:paddingRight="5dip" />
+                        <requestFocus />
+
+                        <EditText
+                            android:id="@+id/editUser"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:inputType="text"
+                            android:text="@string/userDefaultUsername">
+                        </EditText>
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/userPassword"
+                            android:paddingRight="5dip" />
+
+                        <EditText
+                            android:id="@+id/editPassword"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:inputType="textPassword"
+                            android:text="@string/userDefaultPassword">
+                            <requestFocus />
+                        </EditText>
+                    </TableRow>
+
+                </TableLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="textStart"
+                    android:layout_gravity="start"
+                    android:textColor="@color/colorPrimary"
+                    android:text="@string/userButtonLogin"
+                    android:id="@+id/buttonLogin"
+                    style="?android:attr/borderlessButtonStyle"/>
+
+                <ProgressBar
+                    android:id="@+id/loginProgress"
+                    style="?android:progressBarStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:indeterminate="true"
+                    android:indeterminateTintMode="src_atop"
+                    android:indeterminateTint="@color/colorPrimary"
+                    android:layout_marginTop="16dp"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/resultLogin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Login Successful"
+                    android:visibility="gone"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
