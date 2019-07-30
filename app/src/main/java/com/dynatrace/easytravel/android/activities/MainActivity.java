@@ -8,6 +8,8 @@ import android.content.pm.PackageManager;
 import android.graphics.Rect;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+
+import com.dynatrace.easytravel.android.util.WebRequestHelper;
 import com.google.android.material.navigation.NavigationView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -66,6 +68,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
+
+		WebRequestHelper.loadURL("http://settings.crashlytics.com/spi/v2/platforms");
+		WebRequestHelper.loadURL("http://e.crashlytics.com/spi/v2/events");
+		WebRequestHelper.loadURL("http://settings.crashlytics.com/spi/v2/platforms");
+
+		WebRequestHelper.loadURL("http://mboxedge28.tt.omtrdc.net/rest/v2/batchmbox");
+		WebRequestHelper.loadURL("https://www.adobe.com/privacy/experience-cloud.html?f=2o7");
+
+		WebRequestHelper.loadURL("https://www.airship.com/");
+		WebRequestHelper.loadURL("https://www.google.com/");
 
 		// Navigation Drawer
 		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
