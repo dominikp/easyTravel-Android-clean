@@ -46,10 +46,6 @@ import butterknife.OnClick;
  */
 public class SearchFragment extends Fragment implements ListView.OnItemClickListener{
 
-    private static final String NO_JOURNEYS_FOUND_ACTION_NAME = "NoJourneysFound";
-    private static final String JOURNEYS_FOUND_ACTION_NAME = "JourneysFound";
-    private static final String SEARCH_JOURNEY_ACTION_NAME = "searchJourney";
-
     @BindView(R.id.buttonSearchDest)
     Button mButtonSearch;
 
@@ -194,8 +190,6 @@ public class SearchFragment extends Fragment implements ListView.OnItemClickList
 
         @Override
         protected Vector<Journey> doInBackground(Void... params) {
-            //UemAction searchAction = DynatraceUEM.enterAction(SEARCH_JOURNEY_ACTION_NAME);
-
             try {
                 if(mDateFrom != null && mDateTo != null){
                     RestJourney journey = new RestJourney(EasyTravelSettings.getServerHostName(getActivity()),
@@ -203,19 +197,15 @@ public class SearchFragment extends Fragment implements ListView.OnItemClickList
                             mDestination,
                             mDateFrom.getTime(),
                             mDateTo.getTime());
-                    //journey.setParentAction(searchAction);
                     ArrayList<RestJourney.JourneyRecord> records = journey.performSearch();
 
                     if(EasyTravelSettings.shouldHaveErrorOnBookingAndSearch(getActivity())){
-                        //searchAction.reportError("failed to display Ad", -3546);
                     }
 
                     if (journey.hasError()) {
-                        //searchAction.reportEvent(NO_JOURNEYS_FOUND_ACTION_NAME);
                         return null;
                     } else if (records != null && records.size() > 0 ) {
                         final ArrayList<RestJourney.JourneyRecord> finalRecords = new ArrayList<RestJourney.JourneyRecord>(records);
-                        //searchAction.reportValue(JOURNEYS_FOUND_ACTION_NAME, finalRecords.size());
 
                         Vector<Journey> dataJourneys = new Vector<Journey>();
                         for (RestJourney.JourneyRecord record : finalRecords){
@@ -224,7 +214,6 @@ public class SearchFragment extends Fragment implements ListView.OnItemClickList
 
                         return dataJourneys;
                     } else {
-                        //searchAction.reportEvent(NO_JOURNEYS_FOUND_ACTION_NAME);
                         return null;
                     }
                 }else{
@@ -232,7 +221,6 @@ public class SearchFragment extends Fragment implements ListView.OnItemClickList
                     return null;
                 }
             } finally {
-                //searchAction.leaveAction();
             }
         }
 

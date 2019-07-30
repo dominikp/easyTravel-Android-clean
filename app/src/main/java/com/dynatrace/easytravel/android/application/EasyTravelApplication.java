@@ -6,9 +6,6 @@ import com.dynatrace.easytravel.android.data.Journey;
 
 import java.util.Vector;
 
-/**
- * @author richard.vogl
- */
 public class EasyTravelApplication extends Application {
 
     private String loggedInUser = null;

@@ -13,6 +13,7 @@ public class EasyTravelSettings {
     private static final String KEY_EVENT_ERROR_ON_BOOKING_AND_SEARCH = "pref_event_error_on_booking_and_search";
 
     /* WHEN CHANGING PREFERENCES HERE ALSO CHANGE THEM IN THE PREFERENCES.XML */
+    // TODO: (1) enter the URL to your easyTravel environment
     private static final String DEFAULT_SERVER_HOST = "https://easytravel.perform-2018.dynalabs.io";
     private static final String DEFAULT_SERVER_PORT = "443";
 

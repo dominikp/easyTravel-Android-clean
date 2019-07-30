@@ -26,13 +26,6 @@ import butterknife.OnClick;
  * Fragment which is displaying the login mask
  */
 public class UserFragment extends Fragment {
-
-    // Constants for messages
-    private static final String LOGIN_ERROR_ACTION_NAME = "LoginError";
-    private static final String LOGIN_FAILED_ACTION_NAME = "LoginFailed";
-    private static final String LOGIN_SUCCESSFUL_ACTION_NAME = "LoginSuccessful";
-    private static final String DO_LOGIN_ACTION_NAME = "DoLogin";
-
     // UI elements
     @BindView(R.id.editUser) EditText mEditUser;
     @BindView(R.id.editPassword) EditText mEditPassword;
@@ -75,15 +68,7 @@ public class UserFragment extends Fragment {
      * Async task which is performing a login
      */
     private class AsyncLogin extends AsyncTask<Void, Void, Integer> {
-
-        /**
-         * Username
-         */
         String mUser;
-
-        /**
-         * Password
-         */
         String mPassword;
 
         @Override
@@ -96,18 +81,16 @@ public class UserFragment extends Fragment {
 
         @Override
         protected Integer doInBackground(Void... params) {
-            //UemAction loginAction = DynatraceUEM.enterAction(DO_LOGIN_ACTION_NAME + " for '" + mUser +"'");
-
             RestLogin restLogin = new RestLogin(EasyTravelSettings.getServerHostName(getActivity()),
                     Integer.valueOf(EasyTravelSettings.getServerPort(getActivity())),
                     mUser,
                     mPassword);
-            //restLogin.setParentAction(loginAction);
 
             try {
                 restLogin.execute();
 
                 if (restLogin.isSuccessful()) {
+                    // TODO: (3) identifyUser
                     mApp.setLoggedInUser(mUser);
                     return 1;
                 } else {
@@ -118,7 +101,6 @@ public class UserFragment extends Fragment {
                     }
                 }
             } finally {
-                //loginAction.leaveAction();
                 if(EasyTravelSettings.shouldCrashOnLogin(getActivity())){
                     new Crash().boom();
                 }

@@ -97,11 +97,7 @@ public class WebFragment extends Fragment {
             mWebView.setWebViewClient(new WebViewClient() {
                 @Override
                 public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                    // TODO (6) create custom user action and store it to be accessible from the DetailJourneyFragment
-                    // DTXAction action = Dynatrace.enterAction("Loading details for special offer");
-                    // action.reportValue("url", url);
-                    // mApp.setCurrentAction(action);
-
+                    // TODO: create custom user action
                     DetailJourneyFragment frag = new DetailJourneyFragment();
                     Bundle journeyBundle = new Bundle();
                     Calendar calStart  = Calendar.getInstance();

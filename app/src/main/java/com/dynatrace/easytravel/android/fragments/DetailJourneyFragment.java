@@ -26,18 +26,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-/**
- * Created by Matthias Hochrieser
- * Fragment which displays the details of a journey
- */
 public class DetailJourneyFragment extends Fragment implements SeekBar.OnSeekBarChangeListener{
-
-    private static final String BOOK_JOURNEY_ACTION_NAME = "bookJourney";
-    private static final String BOOK_JOURNEY_FAILED_ACTION_NAME = "bookingFailed";
-    private static final String BOOK_JOURNEY_AMOUNT_ACTION_NAME = "bookJourneyAmount";
-    private static final String BOOK_JOURNEY_CONFIRMATION_NUMBER = "bookJourneyConfirmationId";
-    private static final String BOOK_JOURNEY_DESTINATION_ACTION_NAME = "bookJourneyDestination";
-
     @BindView(R.id.nameInfoJourney) TextView mTextNameJourney;
     @BindView(R.id.fromInfoJourney) TextView mTextDateFromJourney;
     @BindView(R.id.toInfoJourney) TextView mTextDateToJourney;
@@ -161,7 +150,6 @@ public class DetailJourneyFragment extends Fragment implements SeekBar.OnSeekBar
         String mCreditCardNumber;
         String mJourneyID;
         RestBooking mBooking;
-        //UemAction mBookAction;
 
         public AsyncBooking(String _creditCardNumber, String _journeyID){
             mCreditCardNumber = _creditCardNumber;
@@ -170,14 +158,12 @@ public class DetailJourneyFragment extends Fragment implements SeekBar.OnSeekBar
 
         @Override
         protected Integer doInBackground(Void... params) {
-            //mBookAction = DynatraceUEM.enterAction(BOOK_JOURNEY_ACTION_NAME);
             mBooking = new RestBooking(EasyTravelSettings.getServerHostName(getActivity()),
                     Integer.valueOf(EasyTravelSettings.getServerPort(getActivity())),
                     mJourneyID,
                     mApp.getLoggedInUser(),
                     mCreditCardNumber,
                     Double.toString(mCurrentTotal));
-            //mBooking.setParentAction(mBookAction);
             int response = mBooking.doBooking();
 
             return response;
@@ -199,29 +185,21 @@ public class DetailJourneyFragment extends Fragment implements SeekBar.OnSeekBar
             if (bookingId != null) {
                 builder.setTitle("Trip Booked Successfully!");
                 builder.setMessage("Your trip to " + mTextNameJourney.getText().toString() + " has been booked. Price: $" + String.format("%.2f $", mCurrentTotal));
-                //mBookAction.reportValue(BOOK_JOURNEY_AMOUNT_ACTION_NAME, mCurrentTotal);
-                //mBookAction.reportValue(BOOK_JOURNEY_DESTINATION_ACTION_NAME, mTextNameJourney.getText().toString());
-                //mBookAction.reportValue(BOOK_JOURNEY_CONFIRMATION_NUMBER, bookingId);
             }else{
                 builder.setTitle("Trip not Booked!");
                 builder.setMessage("Your trip to  " + mTextNameJourney.getText().toString() + " has NOT been booked.");
-                //mBookAction.reportValue(BOOK_JOURNEY_FAILED_ACTION_NAME, mCurrentTotal);
-                //mBookAction.reportValue(BOOK_JOURNEY_DESTINATION_ACTION_NAME, mTextNameJourney.getText().toString());
             }
 
             builder.setPositiveButton("ok", null);
             builder.show();
 
             if(EasyTravelSettings.shouldHaveErrorOnBookingAndSearch(getActivity())){
-                bookingId = null;
                 try{
                     new Crash().pop();
                 }catch (Exception ioobex){
-                    //mBookAction.reportError("failed to resolve booking status", ioobex);
+                    // TODO: report error
                 }
             }
-
-            //mBookAction.leaveAction();
         }
     }
 }
