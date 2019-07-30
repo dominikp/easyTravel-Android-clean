@@ -9,6 +9,7 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 
+import com.dynatrace.easytravel.android.BuildConfig;
 import com.dynatrace.easytravel.android.util.WebRequestHelper;
 import com.google.android.material.navigation.NavigationView;
 import androidx.core.app.ActivityCompat;

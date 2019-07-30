@@ -27,6 +27,18 @@ android {
             proguardFiles 'proguard.cfg'
         }
     }
+
+    flavorDimensions "distributor"
+    productFlavors {
+        dynatrace {
+            dimension "distributor"
+            resValue "string", "appTitle", '"Dynatrace EasyTravel"'
+        }
+        oem {
+            dimension "distributor"
+            resValue "string", "appTitle", '"OEM EasyTravel"'
+        }
+    }
 }
 
 buildscript {
