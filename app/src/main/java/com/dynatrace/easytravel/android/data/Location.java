@@ -3,11 +3,7 @@
  */
 package com.dynatrace.easytravel.android.data;
 
-/**
- * @author pfhazw0
- *
- */
-public class Location {
+class Location {
 
 	private String name = "";
 	private String created = "";

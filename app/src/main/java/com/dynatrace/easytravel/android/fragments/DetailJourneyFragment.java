@@ -175,8 +175,14 @@ public class DetailJourneyFragment extends Fragment implements SeekBar.OnSeekBar
 
             String bookingId = null;
 
-            if (response == mBooking.BOOKING_SUCCESSFUL) {
-                bookingId = mBooking.getBookingId();
+            try{
+                if (response == mBooking.BOOKING_SUCCESSFUL && !EasyTravelSettings.shouldHaveErrorOnBookingAndSearch(getActivity())) {
+                    bookingId = mBooking.getBookingId();
+                } else {
+                    new Crash().pop();
+                }
+            } catch (Exception e){
+                // TODO: (4) report error
             }
 
             mProgressDialog.dismiss();
@@ -192,14 +198,6 @@ public class DetailJourneyFragment extends Fragment implements SeekBar.OnSeekBar
 
             builder.setPositiveButton("ok", null);
             builder.show();
-
-            if(EasyTravelSettings.shouldHaveErrorOnBookingAndSearch(getActivity())){
-                try{
-                    new Crash().pop();
-                }catch (Exception ioobex){
-                    // TODO: (4) report error
-                }
-            }
         }
     }
 }

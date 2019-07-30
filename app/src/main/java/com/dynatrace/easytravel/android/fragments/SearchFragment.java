@@ -192,15 +192,17 @@ public class SearchFragment extends Fragment implements ListView.OnItemClickList
         protected Vector<Journey> doInBackground(Void... params) {
             try {
                 if(mDateFrom != null && mDateTo != null){
+                    if(EasyTravelSettings.shouldHaveErrorOnBookingAndSearch(getActivity())){
+                        // TODO: (4) report error
+                        return null;
+                    }
+
                     RestJourney journey = new RestJourney(EasyTravelSettings.getServerHostName(getActivity()),
                             Integer.valueOf(EasyTravelSettings.getServerPort(getActivity())),
                             mDestination,
                             mDateFrom.getTime(),
                             mDateTo.getTime());
                     ArrayList<RestJourney.JourneyRecord> records = journey.performSearch();
-
-                    if(EasyTravelSettings.shouldHaveErrorOnBookingAndSearch(getActivity())){
-                    }
 
                     if (journey.hasError()) {
                         return null;
