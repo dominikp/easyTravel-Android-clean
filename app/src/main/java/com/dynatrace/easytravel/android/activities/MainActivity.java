@@ -48,10 +48,6 @@ import java.util.Vector;
 
 import butterknife.ButterKnife;
 
-/**
- * Main Activity of the Easy Travel App
- * Author: Matthias Hochrieser
- */
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, OnResultsReturnedListener, FragmentManager.OnBackStackChangedListener, OnJourneySelectedListener, OnLocationChangedListener{
 
 	private ActionBarDrawerToggle mDrawerToggle;
@@ -68,16 +64,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
-
-		WebRequestHelper.loadURL("http://settings.crashlytics.com/spi/v2/platforms");
-		WebRequestHelper.loadURL("http://e.crashlytics.com/spi/v2/events");
-		WebRequestHelper.loadURL("http://settings.crashlytics.com/spi/v2/platforms");
-
-		WebRequestHelper.loadURL("http://mboxedge28.tt.omtrdc.net/rest/v2/batchmbox");
-		WebRequestHelper.loadURL("https://www.adobe.com/privacy/experience-cloud.html?f=2o7");
-
-		WebRequestHelper.loadURL("https://www.airship.com/");
-		WebRequestHelper.loadURL("https://www.google.com/");
 
 		// Navigation Drawer
 		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -127,6 +113,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		shouldDisplayHomeUp();
 
 		askForLocationPermission();
+
+		WebRequestHelper.loadURL("http://settings.crashlytics.com/spi/v2/platforms");
+		WebRequestHelper.loadURL("http://mboxedge28.tt.omtrdc.net/rest/v2/batchmbox");
+		WebRequestHelper.loadURL("https://www.adobe.com/privacy/experience-cloud.html?f=2o7");
+		WebRequestHelper.loadURL("https://www.airship.com/");
+		WebRequestHelper.loadURL("https://www.google.com/");
 	}
 
 	@Override
@@ -155,14 +147,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 	public void initLocationService(){
 		mTracker = new GPSTracker(this);
-
 		if(mTracker.canGetLocation()){
 			Location location = mTracker.getLocation();
-			if(location != null){
-				//DynatraceUEM.setGpsLocation(location);
-			}
-		}else{
-			//DynatraceUEM.reportError("could not access GPS location", -1);
 		}
 	}
 
@@ -174,8 +160,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 			case MY_PERMISSION_LOCATION: {
 				if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 					initLocationService();
-				} else {
-					//DynatraceUEM.reportError("could not access GPS location", -1);
 				}
 				return;
 			}
@@ -330,9 +314,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 	@Override
 	public void locationChanged(Location _location) {
-		if(_location != null){
-			//DynatraceUEM.setGpsLocation(_location);
-		}
+		// nothing to do
 	}
 
 	@Override

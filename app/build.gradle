@@ -49,3 +49,35 @@ dependencies {
 }
 
 // TODO: (2) insert Dynatrace Gradle snippet
+/*
+buildscript {
+    repositories {
+        flatDir {
+            dirs 'libsEAP'
+        }
+    }
+    dependencies {
+        classpath 'com.dynatrace.tools.android:gradle-plugin:8.+'
+    }
+}
+
+repositories {
+    flatDir {
+        dirs 'libsEAP'
+    }
+}
+
+apply plugin: 'com.dynatrace.instrumentation.application'
+
+// simple sample for Dynatrace customers (SaaS and Managed)
+dynatrace {
+    configurations {
+        sampleConfig {
+            autoStart {
+                applicationId 'your-app-id'
+                beaconUrl 'beaconUrl'
+            }
+        }
+    }
+}
+ */

@@ -27,29 +27,49 @@ public class WebRequestHelper extends AsyncTask<String, String, String> {
 
     @Override
     protected String doInBackground(String... params) {
-        try {
-            // Creating & connection Connection with url and required Header.
-            URL url = new URL(this.url);
-            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-            int statusCode = urlConnection.getResponseCode();
+        HttpURLConnection urlConnection = null;
+        InputStreamReader isReader = null;
+        BufferedReader bufReader = null;
+        StringBuffer readTextBuf = new StringBuffer();
 
-            // Connection success. Proceed to fetch the response.
-            if (statusCode == 200) {
-                InputStream it = new BufferedInputStream(urlConnection.getInputStream());
-                InputStreamReader read = new InputStreamReader(it);
-                BufferedReader buff = new BufferedReader(read);
-                StringBuilder data = new StringBuilder();
-                String chunks;
-                while ((chunks = buff.readLine()) != null) {
-                    if (data.length() != 0)
-                        data.append("\r\n");
-                    data.append(chunks);
-                }
-                String content = data.toString();
-                return content;
+        try {
+            URL url = new URL(this.url);
+            urlConnection = (HttpURLConnection)url.openConnection();
+            urlConnection.setConnectTimeout(5000);
+            urlConnection.setReadTimeout(5000);
+            InputStream inputStream = urlConnection.getInputStream();
+            isReader = new InputStreamReader(inputStream);
+            bufReader = new BufferedReader(isReader);
+            String line = bufReader.readLine();
+            while(line != null) {
+                readTextBuf.append(line);
+                line = bufReader.readLine();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+            return readTextBuf.toString();
+        }
+        catch(Exception e) {
+            // ignore
+        }
+        finally {
+            try {
+                if (bufReader != null) {
+                    bufReader.close();
+                    bufReader = null;
+                }
+
+                if (isReader != null) {
+                    isReader.close();
+                    isReader = null;
+                }
+
+                if (urlConnection != null) {
+                    urlConnection.disconnect();
+                    urlConnection = null;
+                }
+            }
+            catch (IOException ex) {
+                // ignore
+            }
         }
         return null;
     }
