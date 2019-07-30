@@ -14,8 +14,8 @@ public class EasyTravelSettings {
 
     /* WHEN CHANGING PREFERENCES HERE ALSO CHANGE THEM IN THE PREFERENCES.XML */
     // TODO: (1) enter the URL to your easyTravel environment
-    private static final String DEFAULT_SERVER_HOST = "https://easytravel.perform-2018.dynalabs.io";
-    private static final String DEFAULT_SERVER_PORT = "443";
+    private static final String DEFAULT_SERVER_HOST = "http://ec2-52-17-244-177.eu-west-1.compute.amazonaws.com";
+    private static final String DEFAULT_SERVER_PORT = "8080";
 
     /* Frontend Host */
 

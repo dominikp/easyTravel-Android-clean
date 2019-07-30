@@ -197,7 +197,7 @@ public class DetailJourneyFragment extends Fragment implements SeekBar.OnSeekBar
                 try{
                     new Crash().pop();
                 }catch (Exception ioobex){
-                    // TODO: report error
+                    // TODO: (4) report error
                 }
             }
         }

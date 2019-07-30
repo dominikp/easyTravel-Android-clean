@@ -97,7 +97,7 @@ public class WebFragment extends Fragment {
             mWebView.setWebViewClient(new WebViewClient() {
                 @Override
                 public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                    // TODO: create custom user action
+                    // TODO: (5) create custom user action
                     DetailJourneyFragment frag = new DetailJourneyFragment();
                     Bundle journeyBundle = new Bundle();
                     Calendar calStart  = Calendar.getInstance();
