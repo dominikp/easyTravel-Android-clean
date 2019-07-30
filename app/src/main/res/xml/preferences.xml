@@ -3,21 +3,17 @@
         android:key="pref_category_host_settings"
         android:title="@string/preference_category_host_settings">
         <EditTextPreference
-            android:defaultValue="https://easytravel.perform-2018.dynalabs.io"
             android:inputType="textUri"
             android:key="pref_hostname"
             android:order="1"
             android:persistent="true"
-            android:summary="https://easytravel.perform-2018.dynalabs.io"
             android:title="@string/preference_hostname" />
 
         <EditTextPreference
-            android:defaultValue="443"
             android:inputType="number"
             android:key="pref_port"
             android:order="2"
             android:persistent="true"
-            android:summary="443"
             android:title="@string/preference_port" />
     </PreferenceCategory>
 

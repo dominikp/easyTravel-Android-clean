@@ -29,4 +29,5 @@ public class EasyTravelApplication extends Application {
     public void setResults(Vector<Journey> results) {
         this.results = results;
     }
+
 }

@@ -16,7 +16,6 @@ public class EasyTravelSettings {
     private static final String DEFAULT_SERVER_HOST = "https://easytravel.perform-2018.dynalabs.io";
     private static final String DEFAULT_SERVER_PORT = "443";
 
-
     /* Frontend Host */
 
     public static String getServerHostName(@NonNull Context context) {
