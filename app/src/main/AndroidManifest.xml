@@ -16,6 +16,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/appName"
         android:allowBackup="false"
+        android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme" >
 
         <uses-library android:name="android.test.runner"/>
