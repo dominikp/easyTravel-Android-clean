@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Errortest</title>
+<script>
+document.e1 = new Error("hello");
+</script>
+</head>
+<body>
+<script>
+document.body.append("JS error test - first error:line 6, second error line 14");
+try {
+	var a = 1;
+	var b = a.test.test;
+} catch (e) {
+	document.e2 = e;
+	var p1 = document.createElement("P");
+	p1.append(document.e1.stack);
+	document.body.appendChild(p1);
+	var p2 = document.createElement("P");
+	p2.append(document.e2.stack);
+	document.body.appendChild(p2);
+}
+</script>
+</body>
+</html>
